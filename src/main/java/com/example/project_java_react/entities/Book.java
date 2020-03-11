@@ -12,9 +12,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Entity
 @Table(name = "t_books")
-
 public class Book extends BaseEntity{
-
     @Column(name = "name")
     private String name;
 

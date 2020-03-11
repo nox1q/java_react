@@ -9,8 +9,6 @@ import java.util.Optional;
 
 public interface BookRepositories extends JpaRepository<Book, Long> {
 
-    List<Book> findAllByDeletedAtNull(Pageable pageable);
-    Optional<Book> findByIdAndDeletedAtNull(Long id);
-    int countAllByDeletedAtNull();
-    Optional<Book> find(Long id);
+
+    Optional<Book> findById(Long id);
 }

@@ -37,7 +37,7 @@ public class MainController {
 
     @GetMapping("/{id}")
     public Book read(@PathVariable Long id){
-        return bookRepositories.find(id).get();
+        return bookRepositories.findById(id).get();
     }
 
     @GetMapping(value = "/")

@@ -10,13 +10,14 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "t_items")
+@Table(name = "t_orders")
 public class Order extends BaseEntity{
-
-    @Column(name = "book_id")
+    @ManyToOne
+    @JoinColumn(name = "book_id")
     private Book book_id;
 
-    @Column(name = "user_id")
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     private Users user_id;
 
     @Column(name = "status_id")
