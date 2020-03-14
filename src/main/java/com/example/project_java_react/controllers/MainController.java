@@ -7,11 +7,13 @@ import com.example.project_java_react.entities.Genre;
 import com.example.project_java_react.entities.Users;
 import com.example.project_java_react.entities.BaseEntity;
 import com.example.project_java_react.entities.Order;
-
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import com.example.project_java_react.repositories.BookRepositories;
 import com.example.project_java_react.repositories.GenreRepositories;
 import com.example.project_java_react.repositories.UserRepositories;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -21,6 +23,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+
 
 import java.util.Date;
 import java.util.List;
@@ -35,16 +38,22 @@ public class MainController {
     @Autowired
     private UserRepositories userRepositories;
 
+    @GetMapping(value = "/")
+    public String index(ModelMap model){
+
+
+        List<Book> books = bookRepositories.findAll();
+        model.addAttribute("books", books);
+
+
+        return "index";
+    }
     @GetMapping("/{id}")
     public Book read(@PathVariable Long id){
         return bookRepositories.findById(id).get();
     }
 
-    @GetMapping(value = "/")
-    public String index(ModelMap model, @RequestParam(name = "page", defaultValue = "1") int page){
-        List <Genre> genres = genreRepositories.findAll();
-        return "index";
-    }
+
 
 
     @GetMapping(value = "/registration")
